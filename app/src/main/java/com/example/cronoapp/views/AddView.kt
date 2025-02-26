@@ -1,11 +1,17 @@
 package com.example.cronoapp.views
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.cronoapp.components.CircleButton
 import com.example.cronoapp.components.FloatButton
 import com.example.cronoapp.components.MainIconButton
 import com.example.cronoapp.components.MainTitle
@@ -67,5 +74,38 @@ fun ContentAddView(it: PaddingValues, navController: NavController, cronometroVM
             fontSize = 50.sp,
             fontWeight = FontWeight.Bold
         )
+
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(vertical = 16.dp)
+        ) {
+            // Iniciar
+            CircleButton(
+                icon = Icons.Default.PlayArrow,
+                enabled = !state.cronometroActivo) {
+                cronometroVM.iniciar()
+            }
+
+            // Pausar
+            CircleButton(
+                icon = Icons.Default.AccountBox,
+                enabled = state.cronometroActivo) {
+                cronometroVM.pausar()
+            }
+
+            // Detener
+            CircleButton(
+                icon = Icons.Default.Build,
+                enabled = !state.cronometroActivo) {
+                cronometroVM.detener()
+            }
+
+            // Mostrar/Guardar
+            CircleButton(
+                icon = Icons.Default.Call,
+                enabled = state.showSaveButton) {
+                cronometroVM.showTextField()
+            }
+        }
     }
 }
