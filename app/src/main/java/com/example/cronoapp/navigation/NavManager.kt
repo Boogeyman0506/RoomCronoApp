@@ -4,12 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.cronoapp.viewModels.CronometroViewModel
 import com.example.cronoapp.views.AddView
 import com.example.cronoapp.views.EditView
 import com.example.cronoapp.views.HomeView
 
 @Composable
-fun NavManager(){
+fun NavManager(cronometroVM: CronometroViewModel){
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "Home"){
         composable("Home"){
@@ -17,7 +18,7 @@ fun NavManager(){
         }
 
         composable("AddView"){
-            AddView(navController)
+            AddView(navController, cronometroVM)
         }
 
         composable("EditView"){
